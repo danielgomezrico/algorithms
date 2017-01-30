@@ -1,8 +1,10 @@
+package sort
+
 fun quicksort(items: List<Int>): List<Int> {
     if (items.size < 2) {
         return items
     } else {
-        val pivot = items[0];
+        val pivot = items[items.size / 2]
         val smallerItems = items.filter { it < pivot }
         val greaterItems = items.filter { it > pivot }
 
