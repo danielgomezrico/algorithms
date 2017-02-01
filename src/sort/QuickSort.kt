@@ -1,17 +1,42 @@
-package sort
+fun quicksort(items: Array<Int>, left: Int, right: Int) {
+    if (left < right) {
+        val lastPivotPosition = partition(items, left, right)
 
-fun quicksort(items: List<Int>): List<Int> {
-    if (items.size < 2) {
-        return items
-    } else {
-        val pivot = items[items.size / 2]
-        val smallerItems = items.filter { it < pivot }
-        val greaterItems = items.filter { it > pivot }
-
-        return quicksort(smallerItems) + pivot + quicksort(greaterItems)
+        quicksort(items, left = left, right = lastPivotPosition - 1) // Left side
+        quicksort(items, left = lastPivotPosition + 1, right = right) // Right side
     }
 }
 
+/**
+ * @return last pivot position
+ */
+fun partition(items: Array<Int>, left: Int, right: Int): Int {
+    val x = items[right]
+    var i = left - 1
+
+    for (j in left..right - 1) {
+        if (items[j] <= x) {
+            i++
+            swap(items, i, j)
+        }
+    }
+
+    i++
+    swap(items, i, right)
+    return i
+}
+
+fun swap(items: Array<Int>, i: Int, j: Int) {
+    val itemI = items[i]
+    items[i] = items[j]
+    items[j] = itemI
+}
+
+
 fun main(args: Array<String>) {
-    quicksort(listOf(22, 4, 65, 1, 34, 235, 236, 4, 624325, 66, 6, 6, 22, 4, 5, 643, 3, 4)).forEach { print(" $it") }
+    val array = arrayOf(5, 1, 2, 6, 9, 2, 2, 2220)
+
+    quicksort(array, 0, array.size - 1)
+
+    array.forEach { print(" $it") }
 }
