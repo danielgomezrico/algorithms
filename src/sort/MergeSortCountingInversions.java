@@ -2,6 +2,9 @@ package sort;
 
 import java.util.Scanner;
 
+/**
+ * http://juliachencoding.blogspot.com.co/2016/08/count-inversions-extended-merge-sort.html
+ */
 public class MergeSortCountingInversions {
     public static class IntWrapper {
         private long count;
